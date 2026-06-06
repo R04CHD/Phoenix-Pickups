@@ -1,0 +1,887 @@
+/* --- METAL CORE VARIABLES --- */
+:root {
+    --bg-black: #050505;
+    --card-bg: #0c0c0c;
+    --blood-red: #880808;
+    --electric-red: #ff0000;
+    --text-silver: #a0a0a0;
+    --white: #ffffff;
+    --nav-height: 80px;
+}
+
+/* --- THE RESET (Ensures alignment) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Crucial for alignment */
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-silver);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- GLASS NAVBAR --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: var(--nav-height);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    
+    /* The Glass Effect */
+    background: rgba(0, 0, 0, 0.6); /* Translucent black */
+    backdrop-filter: blur(15px);   /* Blurs the content behind the nav */
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    
+    /* The "Edge" of the glass */
+    border-bottom: 1px solid rgba(136, 8, 8, 0.4); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Ensure the logo and links stay sharp against the blur */
+.logo { 
+    font-family: 'Syncopate', sans-serif; 
+    font-weight: 900; 
+    color: #fff; 
+    text-decoration: none; 
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(136, 8, 8, 0.8);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: var(--electric-red);
+    text-shadow: 0 0 8px var(--electric-red);
+}
+
+/* Add this to prevent content from jumping under the glass on page load */
+body {
+    padding-top: var(--nav-height);
+}
+
+.logo {
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 900;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 5px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-silver);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--electric-red);
+}
+/* --- HAMBURGER STYLES --- */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: var(--white);
+    transition: 0.3s;
+}
+
+/* --- MOBILE BREAKPOINT (900px) --- */
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Hidden off-screen */
+        top: 0;
+        height: 100vh;
+        width: 70%;
+        background: rgba(5, 5, 5, 0.9);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+        border-left: 1px solid var(--blood-red);
+    }
+
+    .nav-links.open {
+        right: 0; /* Slide in */
+    }
+
+    /* Hamburger Animation to 'X' */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        background: var(--electric-red);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+        background: var(--electric-red);
+    }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: var(--nav-height);
+    padding-bottom: 25px;
+   
+    
+}
+
+.hero h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: var(--white);
+    line-height: 0.9;
+    margin-bottom: 20px;
+}
+
+/* --- PRODUCT GRID (THE BRUTALIST LAYOUT) --- */
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 80px 5%;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap on mobile */
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: var(--card-bg);
+    flex: 1 1 300px; /* Grow, shrink, and base width of 300px */
+    padding: 40px;
+    border: 1px solid #1a1a1a;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    border-color: var(--electric-red);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(136, 8, 8, 0.2);
+}
+
+.card .tag {
+    color: var(--blood-red);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.card h3 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.btn-metal {
+    margin-top: 25px;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--blood-red);
+    color: var(--blood-red);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-metal:hover {
+    background: var(--blood-red);
+    color: var(--white);
+}
+
+/* --- MISSION SECTION (The New Copy) --- */
+.mission-section {
+    background-color: var(--bg-black);
+    padding: 120px 5%;
+    border-top: 1px solid #1a1a1a;
+}
+
+.mission-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 40px;
+}
+
+.vertical-title {
+    writing-mode: vertical-rl;
+    font-family: 'Syncopate', sans-serif;
+    color: var(--blood-red);
+    font-size: 0.8rem;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.mission-content h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+    color: var(--white);
+}
+
+.mission-content p {
+    margin-bottom: 25px;
+    color: var(--text-silver);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.mission-content .lead {
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 300;
+}
+
+.component-shoutout {
+    border-left: 2px solid var(--blood-red);
+    padding-left: 30px;
+    margin: 40px 0;
+}
+
+.component-shoutout p {
+    font-style: italic;
+    color: #fff;
+}
+
+/* Responsive adjust for the mission section */
+@media (max-width: 768px) {
+    .mission-container {
+        grid-template-columns: 1fr;
+    }
+    .vertical-title {
+        writing-mode: horizontal-tb;
+        display: block;
+        margin-bottom: 20px;
+    }
+    .mission-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- ABOUT PAGE SPECIFICS --- */
+
+.editorial-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 5%;
+}
+
+.editorial-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 60px;
+    margin-bottom: 150px;
+    align-items: start;
+}
+
+.editorial-row.inverse {
+    grid-template-columns: 1fr 120px;
+}
+
+.editorial-col.label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chapter-num {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2rem;
+    color: #222; /* Darker grey for background numbering */
+    margin-bottom: 20px;
+}
+
+.v-text {
+    writing-mode: vertical-rl;
+    font-family: 'Syncopate', sans-serif;
+    color: var(--blood-red);
+    letter-spacing: 6px;
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+.editorial-col.text h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.lead-text {
+    font-size: 1.5rem;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 30px;
+    border-left: 3px solid var(--blood-red);
+    padding-left: 25px;
+}
+
+.editorial-col.text p {
+    margin-bottom: 20px;
+    color: var(--text-silver);
+    font-size: 1.1rem;
+}
+
+/* --- BRUTAL CALLOUT (Refined for Responsiveness) --- */
+.brutal-callout {
+    background: var(--blood-red);
+    padding: 80px 10%;
+    text-align: center;
+    margin: 100px 0;
+    position: relative;
+    /* We use skew only on larger screens to prevent mobile clipping */
+    transform: skewY(-2deg);
+    width: 100%;
+    /* Prevents horizontal scrollbar issues */
+    overflow: hidden; 
+}
+
+.brutal-callout h3 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font sizing */
+    color: var(--white);
+    line-height: 1.2;
+    /* Counter-rotate the text so it stays level while the box is skewed */
+    transform: skewY(2deg); 
+}
+
+.brutal-callout p {
+    color: var(--white);
+    font-weight: 700;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /* Counter-rotate the text */
+    transform: skewY(2deg);
+}
+
+/* --- MOBILE FIX --- */
+@media (max-width: 768px) {
+    .brutal-callout {
+        /* Flatten the skew on mobile for better text alignment */
+        transform: skewY(0deg);
+        padding: 60px 5%;
+        margin: 60px 0;
+    }
+    
+    .brutal-callout h3, 
+    .brutal-callout p {
+        transform: skewY(0deg); /* Reset text rotation */
+    }
+}
+
+/* --- FINAL CTA (Separated & Bold) --- */
+.final-cta {
+    text-align: center;
+    padding: 120px 5%; /* Increased vertical padding */
+    margin-top: 100px;  /* Forces distance from the section above */
+    border-top: 1px solid #1a1a1a; /* Visual divider */
+    background: linear-gradient(to bottom, #080808, #000);
+}
+
+.final-cta h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    margin-bottom: 25px;
+    color: var(--white);
+    letter-spacing: 4px;
+}
+
+.final-cta p {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    color: var(--text-silver);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Specific fix for the button inside CTA */
+.final-cta .btn-metal {
+    width: auto; /* Overrides the 100% width from cards */
+    padding: 20px 50px;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .final-cta {
+        margin-top: 60px;
+        padding: 80px 5%;
+    }
+}
+
+/* --- FOOTER --- */
+footer {
+    padding: 60px 5%;
+    text-align: center;
+    border-top: 2px solid #1a1a1a;
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 2px;
+}
+
+/* --- 4-COLUMN FOOTER --- */
+.main-footer {
+    background: #000; /* Deep black for the footer */
+    border-top: 3px solid var(--blood-red); /* Thick red accent line */
+    padding: 80px 5% 40px; /* Space around the main content */
+    margin-top: 100px;
+    color: var(--text-silver);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    /* This rule defines 4 columns that fill the space automatically */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px; /* Space between columns */
+    margin-bottom: 60px; /* Space before the bottom bar */
+}
+
+/* Base Styles for Footer Columns */
+.footer-col h4 {
+    font-family: 'Syncopate', sans-serif;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: var(--text-silver);
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: var(--electric-red);
+}
+
+/* Brand & Social Column */
+.brand-col .logo {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.social-links {
+    margin-top: 25px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Style the Facebook Icon: Dark Grey with Red Hover */
+.social-links i {
+    font-size: 1.4rem;
+    color: #444; /* Distressed metal look */
+    transition: 0.3s;
+}
+
+.social-links a:hover i {
+    color: var(--electric-red);
+    transform: scale(1.1);
+}
+
+/* Quick Links Column */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- FOOTER BOTTOM --- */
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 40px;
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    color: #333; /* Dimmed legal text */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 900px) {
+    .footer-container {
+        /* On medium screens, show 2 columns */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-footer {
+        padding: 60px 5% 30px;
+    }
+    .footer-container {
+        /* On small screens, stack them vertically */
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-bottom {
+        padding-top: 30px;
+    }
+}
+/* --- METAL FORM STYLES --- */
+.contact-section {
+    padding: 100px 5%;
+    background: #000;
+}
+
+.metal-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    outline: none;
+}
+
+/* Focus state: Red glow when typing */
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: var(--electric-red);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+.metal-form select {
+    cursor: pointer;
+    appearance: none; /* Removes default browser styling */
+}
+
+/* Hide the Honeypot */
+.hidden {
+    display: none;
+}
+
+.metal-form .btn-metal {
+    margin-top: 10px;
+    cursor: pointer;
+}
+/* --- SVG SOCIAL ICON STYLES --- */
+.fb-icon {
+    width: 24px;
+    height: 24px;
+    fill: #444; /* Match your footer's muted metal look */
+    transition: transform 0.3s ease, fill 0.3s ease;
+    vertical-align: middle;
+}
+
+.social-links a:hover .fb-icon {
+    fill: var(--blood-red); /* Snaps to brand red on hover */
+    transform: scale(1.1);
+}
+
+/* --- CONTACT PAGE SPLIT --- */
+.contact-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+    padding-top: 80px; /* Offset for nav */
+}
+
+.map-side {
+    position: relative;
+    background: #111;
+    min-height: 400px;
+}
+
+/* We use CSS filters to make the map look 'Metal' and Dark Mode */
+.map-side iframe {
+    filter: grayscale(1) invert(0.9) contrast(1.2) brightness(0.8);
+    opacity: 0.6;
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    background: var(--blood-red);
+    color: white;
+    padding: 10px 20px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.form-side {
+    padding: 80px 10%;
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: var(--text-silver);
+    margin-bottom: 40px;
+}
+
+.contact-info-block {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #1a1a1a;
+}
+
+.contact-info-block p {
+    color: #555;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+/* Responsive Fix */
+@media (max-width: 900px) {
+    .contact-split-container {
+        grid-template-columns: 1fr;
+    }
+    .map-side {
+        height: 300px;
+        order: 2; /* Move map below form on mobile */
+    }
+    .form-side {
+        padding: 60px 5%;
+        order: 1;
+    }
+}
+/* Add these specific fixes to the bottom of your style1.css file */
+
+/* --- MISSING CLASSES --- */
+.red-highlight {
+    color: var(--electric-red);
+}
+
+/* --- CONTACT PAGE SPLIT LAYOUT --- */
+.contact-page {
+    padding-top: 0 !important; /* Overriding the general body padding for this layout */
+}
+
+.contact-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    background: var(--bg-black);
+}
+
+.map-side {
+    position: relative;
+    background: #000;
+    height: 100vh;
+}
+
+.map-side iframe {
+    filter: grayscale(1) invert(0.9) contrast(1.2) brightness(0.5);
+    border: none;
+    opacity: 0.7;
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    background: var(--blood-red);
+    color: var(--white);
+    padding: 12px 25px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    z-index: 10;
+}
+
+.form-side {
+    padding: 120px 10% 80px;
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- FORM FIXES --- */
+/* This ensures the inputs look "Metal" even if they aren't in a form-group */
+.metal-form .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.metal-form input, 
+.metal-form textarea, 
+.metal-form select {
+    width: 100%;
+    padding: 18px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    outline: none;
+}
+
+.metal-form input:focus, 
+.metal-form textarea:focus,
+.metal-form select:focus {
+    border-color: var(--electric-red);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+}
+
+/* --- RESPONSIVE CONTACT --- */
+@media (max-width: 1024px) {
+    .contact-split-container {
+        grid-template-columns: 1fr;
+    }
+    .map-side {
+        height: 400px;
+        order: 2;
+    }
+    .form-side {
+        padding: 100px 5% 60px;
+        order: 1;
+    }
+}
+/* --- MULTI-METER GROUPING --- */
+.meter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 15px 0 25px;
+}
+
+.output-meter {
+    width: 100%;
+}
+
+.meter-label {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #444; /* Muted so the bars pop */
+    margin-bottom: 4px;
+    font-family: 'Syncopate', sans-serif;
+}
+
+.bar-bg {
+    width: 100%;
+    height: 3px; /* Slightly thinner for multi-meter look */
+    background: #111;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--blood-red);
+    transition: width 1.5s cubic-bezier(0.1, 0, 0, 1);
+}
+
+/* Specific glow for the Sustain meter */
+.sustain-glow {
+    background: linear-gradient(90deg, var(--blood-red), #fff);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Subtle animation on hover of the whole card */
+.card:hover .bar-fill {
+    filter: brightness(1.3);
+}

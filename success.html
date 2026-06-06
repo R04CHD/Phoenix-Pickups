@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x15" href="img/PhoenixPickupFavIcon32.png">
+    <title>MESSAGE RECEIVED | PHOENIX PICKUPS</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .success-wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                        url('img/PhoenixPickupLogoSuccess.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .success-card {
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--blood-red);
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-wrapper">
+        <div class="success-card">
+            <h1 style="font-family: 'Syncopate'; color: #fff; margin-bottom: 20px;">DISPATCH <br><span style="color: var(--blood-red);">SUCCESSFUL</span></h1>
+            <p style="color: #a0a0a0; margin-bottom: 30px; letter-spacing: 1px;">Your request has been forged. We will respond to your sonic inquiry shortly.</p>
+            <a href="index.html" class="btn-metal">RETURN TO ARMORY</a>
+        </div>
+    </div>
+</body>
+</html>

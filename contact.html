@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT | PHOENIX PICKUPS</title>
+    <link rel="icon" type="image/png" sizes="16x15" href="img/PhoenixPickupFavIcon32.png">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="contact-page">
+
+<nav>
+    <a href="index.html" class="logo">PHOENIX</a>
+    <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">STORY</a></li>
+        <li><a href="contact.html" class="active">CONTACT</a></li>
+    </ul>
+</nav>
+
+<main class="contact-split-container">
+    <section class="map-side">
+        <iframe 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://www.openstreetmap.org/export/embed.html?bbox=145.4526%2C-37.8202%2C145.8526%2C-37.7202&amp;layer=mapnik&amp;marker=-37.7770%2C145.6526" 
+            style="filter: grayscale(1) invert(1) contrast(1.2);">
+        </iframe>
+        <div class="map-overlay">
+            <span>YARRA JUNCTION, VIC</span>
+        </div>
+    </section>
+
+    <section class="form-side">
+        <div class="form-header">
+            <h1>GET IN <span class="red-highlight">TOUCH</span></h1>
+            <p>Direct from the Yarra Valley workshop. Tell us about your project.</p>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="metal-form">
+            <input type="text" name="name" placeholder="NAME" required>
+            <input type="email" name="email" placeholder="EMAIL" required>
+            
+            <select name="subject">
+                <option value="" disabled selected>SELECT YOUR ORDINANCE</option>
+                <option value="quote">PARTNER WITH PHOENIX PICKUPS</option>
+                <option value="support">TECHNICAL SUPPORT</option>
+                <option value="custom">CUSTOM BUILD INQUIRY</option>
+            </select>
+
+            <textarea name="message" placeholder="SOUNDSCAPE MESSAGE..." rows="6" required></textarea>
+            
+            <label class="hidden">Don't fill this out if you're human: <input name="_gotcha"></label>
+
+            <input type="hidden" name="_next" value="http://127.0.0.1:5500/success.html">
+            <button type="submit" class="btn-metal">DISPATCH MESSAGE</button>
+        </form>
+
+        <div class="contact-info-block">
+            <p><strong>PH:</strong> 0400 595 079</p>
+            <p><strong>MAIL:</strong> P.O Box 565, Yarra Junction, VIC 3797</p>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
